@@ -3,18 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>15740 - Company Name</title>
+    <title>Company Name</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="page-wrap">
         <header>
             <div class="header-content">
-                <div>
-                    <p>Welcome</p>
-                    <h1>Company Name</h1>
+                <div class="header-left">
+                    <span id="clock"></span>
+                    <div>
+                        <p>Welcome</p>
+                        <h1>Company Name</h1>
+                    </div>
                 </div>
-                <button id="theme-toggle" title="Zmień tryb jasny/ciemny">🌙</button>
+                <div class="theme-toggle-wrap">
+                    <button id="theme-toggle" title="Zmień tryb jasny/ciemny">🌙</button>
+                </div>
             </div>
         </header>
 
@@ -48,7 +53,19 @@
     </footer>
 
     <script>
-    // Dark mode toggle
+    // Zegar w lewym górnym rogu
+    function updateClock() {
+        const clock = document.getElementById('clock');
+        const now = new Date();
+        const h = String(now.getHours()).padStart(2, '0');
+        const m = String(now.getMinutes()).padStart(2, '0');
+        const s = String(now.getSeconds()).padStart(2, '0');
+        clock.textContent = `${h}:${m}:${s}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Przełącznik trybu jasny/ciemny
     const btn = document.getElementById('theme-toggle');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const savedTheme = localStorage.getItem('theme');
